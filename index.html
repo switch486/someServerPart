@@ -52,21 +52,22 @@
 				
 				<section>
 					<ul>
-						<li><a href="#/GIT">GIT</a></li>
+						<li><a href="#/GIT">GIT ########</a></li>
 						<li><a href="#/Spring">Spring Framework</a></li>
 						<li><a href="#/Maven">Maven</a></li>
 						<li><a href="#/SpringBoot">Spring Boot</a></li>
 						<li><a href="#/Arch">Architektura wielowarstwowa</a></li>
 						<li><a href="#/REST">RESTful Services</a></li>
-						<li><a href="#/zadania1">Zadania 1 </a></li>
+						<li><a href="#/zadania1">Zadania 1  ########</a></li>
 						<li><a href="#/RelationalDBs">Relacyjne bazy danych a świat obiektowy</a></li>
 						<li><a href="#/ORM">Odwzorowanie obiektowo-relacyjne</a></li>
-						<li><a href="#/SpringData">Spring Data</a></li>
-						<li><a href="#/Repository">Repository</a></li>
-						<li><a href="#/zadania2">Zadania 2 </a></li>
-						<li><a href="#/Transactions">Transakcje</a></li>
-						<li><a href="#/Tests">Testy</a></li>
-						<li><a href="#/zadania3">Zadania 3 </a></li>				
+						<li><a href="#/Mapstruct">Mapstruct ########</a></li>
+						<li><a href="#/SpringData">Spring Data ########</a></li>
+						<li><a href="#/Repository">Repository ########</a></li>
+						<li><a href="#/zadania2">Zadania 2  ########</a></li>
+						<li><a href="#/Transactions">Transakcje ########</a></li>
+						<li><a href="#/Tests">Testy ########</a></li>
+						<li><a href="#/zadania3">Zadania 3  ########</a></li>				
 					</ul>
 				</section>
 				
@@ -1409,6 +1410,18 @@ public class PaperBookExemplarEntity extends BookExemplarEntity  {
 
 				</section>
 				
+				
+				<!-- Mapstruct -->
+				<section>
+					<!-- Start -->
+					<section id="Mapstruct" data-transition="slide" data-background="orange" data-background-transition="zoom">
+						<h1>Mapstruct</h1>
+					</section>
+				<!-- TODO -->
+
+				</section>
+
+				
 				<!-- SpringData -->
 				<section>
 					<!-- Start -->
@@ -1466,7 +1479,74 @@ public class PaperBookExemplarEntity extends BookExemplarEntity  {
 					<section id="Transactions" data-transition="slide" data-background="orange" data-background-transition="zoom">
 						<h1>Transakcje</h1>
 					</section>
-				<!-- TODO -->
+					
+					<section>
+				<h3>Transakcje</h3>
+					<ul>
+						<li>Zbiór operacji na bazie danych stanowiących jedną całość
+ 						<li>Zmieniają spójny stan bazy danych w inny spójny stan
+ 						<li>Cechy transakcji:
+						<ul>
+							<li>Atomowość (<b>A</b>tomicity)
+							<li>Spójność (<b>C</b>onsistency)
+							<li>Izolacja (<b>I</b>soation)
+							<li>Trwałość (<b>D</b>urability)	
+						</ul>
+					</ul>
+				</section>
+				
+				<section>
+				<h4>Transakcje - Entity Manager</h4>
+				
+									<pre><code class="Java" data-trim>
+// rozpoczyna transakcję
+em.getTransaction().begin();
+
+// wykonanie operacji
+Product prodFromDb = em.find(Product.class, 1);
+prodFromDb.setCategory("newCategory");
+
+// zatwierdzenie transakcji
+em.getTransaction().commit();
+
+// ewentualne wycofanie transakcji
+em.getTransaction().rollback();
+					</code></pre>
+				</section>
+				
+				<section>
+				Transakcje Spring <b>@Transactional</b>
+				
+					<ul>
+						<li>Najlepszy sposób budowania transakcyjnych aplikacji Spring 
+ 						<li>Brak powielonego kodu
+						<li>Bardzo łatwa konfiguracja
+						<li>Propagacja, izolacja, timeout, readOnly, rollbackFor itp.
+						<li>Możliwość zdefiniowania na całej klasie i metodzie
+					</ul>
+				</section>	
+
+				<section>
+				<h4>@Transactional</h4>
+									<pre><code class="Java" data-trim>
+@Service
+@Transactional(readOnly = true)
+public class LibraryServiceImpl implements LibraryService {
+
+	@Autowired
+	private LibraryRepository libraryRepository;
+	
+	@Autowired
+	private MapperFacade mapper;
+	
+	@Override
+	public List&lt;LibraryTO&gt; findAllLibraries () {
+		List&lt;LibraryEntity&gt; libraries = libraryRepository.findAll();
+		return mapper.mapAsList(libraries, LibraryTO.class);
+	}
+}
+					</code></pre>
+				</section>	
 
 				</section>
 				
@@ -1477,7 +1557,103 @@ public class PaperBookExemplarEntity extends BookExemplarEntity  {
 					<section id="Tests" data-transition="slide" data-background="orange" data-background-transition="zoom">
 						<h1>Testy</h1>
 					</section>
-				<!-- TODO -->
+					
+					<section>
+				<h3>Po co testy?</h3>
+				
+				</section>
+				
+				
+						<!-- TODO -->
+				<section>		
+				
+				<img src="resources/img/sc.jpg" style="background:none; border:none; box-shadow:none;">
+				
+				</section>
+				
+				<section>
+				<h3>Jakie testy warto tworzyć</h3>
+					<ol>
+						<li>Jednostkowe
+						<li>Integracyjne	
+						<li>Komponentowe
+						<li>E2E
+						<li>Akceptacyjne
+					</ol>
+					<p>
+					<small><a href="https://en.wikipedia.org/wiki/Software_testing">Wikipedia</a></small>
+					</p>
+				</section>
+				
+				<section>
+				<h3>Jakie narzędzia wykorzystywać przy tworzeniu testów</h3>
+					<ol>
+						<li>Mockowanie zależności
+						<li>Asercje
+						<li>given-when-then
+						<li>Continuous Integration
+						<li>Argument Captors
+						<li>...
+					</ol>
+				</section>
+				
+				<section>
+				<h3>Test Jednostkowy z wykorzystaniem MockMVC</h3>
+				<pre><code class="Java" data-trim>		
+@EnableWebMvc
+@ComponentScan("org.itsurvival.books.rest")
+public static class BooksRestServiceTestConfiguration {
+
+    @Bean
+    public BookService bookService() {
+        return Mockito.mock(BookService.class);
+    }
+}
+
+private MockMvc mockMvc;
+
+@Autowired
+private WebApplicationContext webApplicationContext;
+
+@Autowired
+private BookService bookService;
+
+@Captor
+private ArgumentCaptor&lt;BookSearchCriteria&gt; bookSearchCriteriaCaptor;
+
+@Captor
+private ArgumentCaptor&lt;BookTo&gt; bookCaptor;
+				
+@Test
+public void shouldAddNewBook() throws Exception {
+
+    // given
+    byte[] content = readFileToBytes(
+		"classpath:org/itsurvival/books/rest/newBook.json");
+
+    when(bookService.addBook(any(BookTo.class)))
+		.thenAnswer(args -> args.getArguments()[0]);
+
+    // when
+    mockMvc.perform(post("/services/book")
+			.content(content)
+			.contentType(MediaType.APPLICATION_JSON))
+            // then
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.title", is("Test title")));
+
+
+    verify(bookService).addBook(bookCaptor.capture());
+    BookTo book = bookCaptor.getValue();
+    assertThat(book.getTitle()).isEqualTo("Test title");
+    assertThat(book.getAuthor()).isEqualTo("Test author");
+    assertThat(book.getYear()).isEqualTo(2008);
+    assertThat(book.getGenre()).isEqualTo(Genre.IT);
+    assertThat(book.getVersion()).isEqualTo(0L);
+    assertThat(book.getId()).isNull();
+}
+				</code></pre>
+				</section>
 
 				</section>
 				
