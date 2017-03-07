@@ -61,7 +61,6 @@
 						<li><a href="#/RelationalDBs">Relacyjne bazy danych a świat obiektowy + ORM</a></li>
 						<li><a href="#/Mapstruct">Mapstruct ########</a></li>
 						<li><a href="#/SpringData">Spring Data ########</a></li>
-						<li><a href="#/Repository">Repository ########</a></li>
 						<li><a href="#/zadania2">** Zadania 2 ** ########</a></li>
 						<li><a href="#/Transactions">Transakcje</a></li>
 						<li><a href="#/Tests">Testy</a></li>
@@ -1741,18 +1740,163 @@ public class PaperBookExemplarEntity extends BookExemplarEntity  {
 					<section id="SpringData" data-transition="slide" data-background="orange" data-background-transition="zoom">
 						<h1>Spring Data</h1>
 					</section>
-				<!-- TODO -->
+					
+					<section>
+						<h3>Czym jest Spring Data JPA</h3>
+							<ul>
+								<li>kolejna warstwa abstrakcji
+								<li>która pozwala pisać mniej kodu!
+							</ul>
+							
+							<img src="resources/img/spring_data.jpg" style="background:none; border:none; box-shadow:none;">
+<a href="http://simplej2eetutorials.blogspot.de/2014/12/spring-data-jpa-tutorial.html"> LINK </a>
+					</section>
+					
+					
+					<section>
+						<h3>Bez Spring Data</h3>
+					<pre><code class="Java" data-trim contenteditable>
+@Repository
+@Transactional(readOnly = true)
+class AccountDaoJpaImpl implements AccountDao {
 
+  @PersistenceContext
+  private EntityManager em;
+
+  @Override
+  @Transactional
+  public Account save(Account account) {
+
+    if (account.getId() == null) {
+      em.persist(account);
+      return account;
+    } else {
+      return em.merge(account);
+    }
+  }
+
+  @Override
+  public List&lt;Account&gt; findByCustomer(Customer customer) {
+
+    TypedQuery query = em.createQuery("select a from Account a where a.customer = ?1", Account.class);
+
+    query.setParameter(1, customer);
+    return query.getResultList();
+  }
+}
+</code></pre>
+					</section>
+					
+					<section>
+						<h3>Z Spring Data!</h3>
+					<pre><code class="Java" data-trim contenteditable>
+public interface AccountRepository extends 
+	JpaRepository&lt;Account, Long&gt; {
+
+    List&lt;Account&gt; findByCustomer(Customer customer); 
+}
+</code></pre>
+					</section>
+					
+					<section>
+						<h3>Query by Convention</h3>
+					<pre><code class="Java" data-trim contenteditable>
+public interface CustomerRepository extends CrudRepository&lt;Customer, Long&gt; {
+
+    List&lt;Customer&gt; findByLastName(String lastName);
+    List&lt;User&gt; findByEmailAddressAndLastname(String emailAddress, String lastname);
+
+}
+</code></pre>
+					</section>
+					
+					<section>
+						<h3>@Query</h3>
+					<pre><code class="Java" data-trim contenteditable>
+public interface UserRepository extends JpaRepository&lt;User, Long&gt; {
+
+@Query("select u from User u where u.firstname = :firstname or u.lastname = :lastname")
+User findByLastnameOrFirstname(@Param("lastname") String lastname, @Param("firstname") String firstname);
+
+
+@Modifying
+@Query("update User u set u.firstname = ?1 where u.lastname = ?2")
+int setFixedFirstnameFor(String firstname, String lastname);
+
+}
+</code></pre>
+					</section>
+					
+				<section>
+						<h3>Podsumowanie</h3>
+					<ul>
+						<li>Dziedziczenie z CrudRepository daje CustomerRepository dostęp do metod, które operują na encji Customer takich jak: save, delete, findAll, findOne
+						<li>Spring Data JPA pozwala na definiowanie innych zapytań poprzez zwykłą deklarację sygnatury metody: fingByLastName.
+						<li>Brak implementacji interfejsu
+						<li>Wszystkie metody są wykonywane w transakcji
+					</ul>
 				</section>
 				
-				<!-- Repository -->
 				<section>
-					<!-- Start -->
-					<section id="Repository" data-transition="slide" data-background="orange" data-background-transition="zoom">
-						<h1>Repository</h1>
-					</section>
-				<!-- TODO -->
+					<h3>Query DSL</h3>
+					<ul>
+						<li>Powstał z potrzeby utrzymywania zapytań HQL w formie bezpiecznej z perspektywy typizacji
+					</ul>
+				</section>
+				
+				<section>
+					<h3>Query DSL</h3>
+<pre><code class="Java" data-trim contenteditable>
+@PersistenceContext
+	private EntityManager em;
 
+JPAQueryFactory queryFactory = new JPAQueryFactory(this.em);
+
+// Metoda
+
+QCustomer customer = QCustomer.customer;
+Customer result = queryFactory.selectFrom(customer)
+    .where(customer.firstName.eq("Bob"), 
+	customer.lastName.eq("Wilson"))
+    .fetchOne();
+</code></pre>
+				</section>
+				
+				<section>
+					<h3>Query DSL - sortowanie</h3>
+<pre><code class="Java" data-trim contenteditable>
+QCustomer customer = QCustomer.customer;
+List&lt;Customer&gt; results = queryFactory.selectFrom(customer)
+    .orderBy(customer.lastName.asc(), customer.firstName.desc())
+    .fetch();
+
+</code></pre>
+				</section>
+				
+				<section>
+					<h3>Query DSL - grupowanie</h3>
+<pre><code class="Java" data-trim contenteditable>
+List&lt;Customer&gt; results = queryFactory.select(customer.lastName).from(customer)
+    .groupBy(customer.lastName)
+    .fetch();
+
+</code></pre>
+				</section>
+				
+				
+				
+				<section>
+					<h3>Query DSL - usuwanie</h3>
+<pre><code class="Java" data-trim contenteditable>
+QCustomer customer = QCustomer.customer;
+
+// delete all customers
+queryFactory.delete(customer).execute();
+
+// delete all customers with a level less than 3
+queryFactory.delete(customer).where(customer.level.lt(3)).execute();
+
+</code></pre>
 				</section>
 				
 				
