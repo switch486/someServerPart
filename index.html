@@ -47,33 +47,27 @@
 					</aside>
 				</section>
 				
-				<!-- TODO agenda z podzialem na czas dla obu streamow -->
 				<!-- Capgemini logo! -->
 				
 				<section>
 					<ul>
-						<li><a href="#/GIT">GIT ########</a></li>
+						<li><a href="#/GIT">GIT</a></li>
 						<li><a href="#/Spring">Spring Framework</a></li>
 						<li><a href="#/Maven">Maven</a></li>
 						<li><a href="#/SpringBoot">Spring Boot</a></li>
 						<li><a href="#/Arch">Architektura wielowarstwowa</a></li>
-						<li><a href="#/REST">RESTful Services</a></li>
-						<li><a href="#/zadania1">Zadania 1  ########</a></li>
-						<li><a href="#/RelationalDBs">Relacyjne bazy danych a świat obiektowy</a></li>
-						<li><a href="#/ORM">Odwzorowanie obiektowo-relacyjne</a></li>
+						<li><a href="#/REST">RESTful Services + Controller Advice</a></li>
+						<li><a href="#/zadania1">** Zadania 1 ** ########</a></li>
+						<li><a href="#/RelationalDBs">Relacyjne bazy danych a świat obiektowy + ORM</a></li>
 						<li><a href="#/Mapstruct">Mapstruct ########</a></li>
 						<li><a href="#/SpringData">Spring Data ########</a></li>
 						<li><a href="#/Repository">Repository ########</a></li>
-						<li><a href="#/zadania2">Zadania 2  ########</a></li>
-						<li><a href="#/Transactions">Transakcje ########</a></li>
-						<li><a href="#/Tests">Testy ########</a></li>
-						<li><a href="#/zadania3">Zadania 3  ########</a></li>				
+						<li><a href="#/zadania2">** Zadania 2 ** ########</a></li>
+						<li><a href="#/Transactions">Transakcje</a></li>
+						<li><a href="#/Tests">Testy</a></li>
+						<li><a href="#/zadania3">** Zadania 3 ** ########</a></li>		
 					</ul>
 				</section>
-				
-				<!-- TODO Autorzy -->
-				
-				<!-- TODO Folia PO CO przed kazda czescia ! -->
 				
 				<!-- ------ -->
 				<!-- ------ -->
@@ -85,7 +79,156 @@
 					<section id="GIT" data-transition="slide" data-background="orange" data-background-transition="zoom">
 						<h1>GIT</h1>
 					</section>
-				<!-- TODO -->
+					
+					<section>
+						<h2>Git</h2>
+						<ul>
+							<li>Rozproszony system kontroli wersji</li>
+							<li>Repozytorium gita to dowolny katalog w którym znajduje się podkatalog o nazwie .git</li>
+							<li>Repozytorium po stronie serwera niczym nie różni się od repozytorium klienta</li>
+							<li>Umożliwia pracę grupie osób na tych samych plikach w tym samym czasie</li>
+							<li>Opublikowany na licencji GNU GPL</li>
+							<li>Możliwość pracy off-line</li>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>git clone</h2>
+						<ul>
+							<li>Kopiuje istniejące repozytorium</li>
+							<li>Lokalna kopia jest pełnowartościowym repozytorium</li>
+							<ul>
+								<li>posiada własną historię plików</li>
+								<li>zarządza własnymi plikami</li>
+								<li>jest zupełnie odizolowana od oryginalnego repozytorium</li>
+								<li>umożliwia pracę offline</li>
+							</ul>
+						</ul>
+					</section>
+					
+					<section>
+						<h2>git config</h2>
+						<ul>
+							<li>Konfiguruje pojedyncze repozytorium lub ustawienia globalne</li>
+							<li>Konfiguruje preferencje użytownika</li>
+						</ul>
+							
+							<pre><code class="Bash" data-trim contenteditable>
+git config user.name NAME
+git config --global user.name NAME
+git config --global user.email EMAIL
+git config --global credential.helper store
+</code></pre>
+					</section>
+					
+					<section>
+						<h2>git add</h2>
+						<ul>
+							<li>Dodaje zmieniony w katalogu roboczym plik do obszaru tymczasowego</li>
+							<li>Powiadamia git’a, że ma załączyć zmiany danego pliku przy następnym commit’cie</li>
+							<li>Nie wpływa znacząco na repozytorium</li>
+							<pre><code class="Bash" data-trim contenteditable>
+git add FILE
+git add DIRECTORY
+git add .
+</code></pre>
+							
+						</ul>
+					</section>
+										
+					<section>
+						<h2>git commit</h2>
+						<ul>
+							<li>Dodaje wcześniej wybrane pliki do historii repozytorium (lokalnego)</li>
+							<li>Brak interakcji w centralnym repozytorium (offline)</li>
+							<li>Nie wpływa znacząco na repozytorium</li>
+							<pre><code class="Bash" data-trim contenteditable>
+git commit -m "MESSAGE"
+</code></pre>
+							<li>git add i git commit to dwa fundamentalne polecenia przepływu pracy</li>
+						</ul>
+					</section>
+										
+					<section>
+						<h2>git push</h2>
+						<ul>
+							<li>Sposób wysłania lokalnych zmian i historii do zdalnego repozytorium</li>
+							<li>W przypadku konfliktu zmiany nie zostaną „wypchnięte”</li>
+							<li>Udostępnienie/upublicznienie zmian innym</li>
+						</ul>
+							<pre><code class="Bash" data-trim contenteditable>
+git push REMOTE BRANCH
+</code></pre>
+					</section>
+										
+					<section>
+						<h2>git fetch</h2>
+						<ul>
+							<li>Import gałęzi (branch) ze zdalnego repozytorium do lokalnego</li>
+							<li>Pobrane zmiany nie modyfikują katalogu roboczego</li>
+							<li>Możliwość przejrzenia zmian przed ostatecznym merge’m</li>
+						</ul>
+							<pre><code class="Bash" data-trim contenteditable>
+git fetch REMOTE
+</code></pre>
+					</section>
+							
+					<section>
+						<h2>git pull</h2>
+						<ul>
+							<li>Działa tak samo jak fetch z tą różnicą, że automatycznie wykonywany jest merge</li>
+							<li>Zmiany ze zdalnego repozytorium od razu umieszczane są w lokalnym repozytorium</li>
+						</ul>
+							<pre><code class="Bash" data-trim contenteditable>
+git pull REMOTE
+</code></pre>
+					</section>
+							
+					<section>
+						<h2>git branch</h2>
+						<ul>
+							<li>Reprezentuje niezależne zmiany katalogu roboczego</li>
+							<li>Komenda pozwala tworzyć, dodawać, zmieniać nazwy i usuwać gałęzie</li>
+							<li>Zmiana gałęzi powoduje podmianę plików w bieżącym katalogu roboczym</li>
+						</ul>
+							<pre><code class="Bash" data-trim contenteditable>
+git branch
+git branch -r
+git branch BRANCH
+git branch -d BRANCH
+</code></pre>
+					</section>
+							
+					<section>
+						<h2>git checkout (branch)</h2>
+						<ul>
+							<li>Umożliwia nawigację między gałęziami</li>
+							<li>Podmienia pliki w bieżącym katalogu</li>
+							<li>Zmienia kontekst – nowe commit’y będą przypisane do aktualnej gałęzi</li>
+						</ul>
+							<pre><code class="Bash" data-trim contenteditable>
+git checkout EXISTING_BRANCH
+git checkout -b NEW_BRANCH
+</code></pre>
+					</section>
+					
+					
+					
+					<section>
+						<h2>Pozostałe komendy</h2>
+						
+						<ul>
+							<li>git init</li>
+							<li>git merge</li>
+							<li>git status</li>
+							<li>git log</li>
+							<li>git revert</li>
+							<li>git reset</li>
+							<li>git stash</li>
+						</ul>
+						
+					</section>
+					
 				</section>
 				
 				<!-- ------ -->
@@ -525,6 +668,86 @@ public boolean deleteCar(@PathVariable("id") Long id) { ... }
 
 				</section>
 				
+				<!-- ---- -->
+				<!-- ---- -->
+				<!-- Controler Advice -->
+				<!-- ---- -->
+				<!-- ---- -->
+				<section>
+					<!-- Start -->
+					<section id="REST" data-transition="slide" data-background="orange" data-background-transition="zoom">
+						<h1>Controler Advice</h1>
+					</section>
+					
+					<section>
+					<h3>Controler Advice - obsługa wyjątków warstwy serwisowej</h3>
+					
+					<pre><code class="Java" data-trim contenteditable>
+@RequestMapping(path = "/car", method = RequestMethod.PUT)
+public CarTo updateCar(@RequestBody CarTo car) { 
+
+	// co jeśli Spring nie dostanie jako argument JSONa poprawnie - 
+	// ale biznesowo poprawnie - tłumaczącego się na CarTo?
+
+}
+
+					</code></pre>	
+				</section>
+				
+				<section>
+					<h3>@Valid</h3>
+					
+					<pre><code class="Java" data-trim contenteditable>
+@RequestMapping(path = "/car", method = RequestMethod.PUT)
+public CarTo updateCar(@RequestBody @Valid CarTo car) { 
+
+	// Metoda nie zostanie wywołana jesli walidacje okreslone deklaratywnie w CarTo nie przechodzą
+
+}
+					</code></pre>	
+				</section>
+				
+				<section>
+					<h3>CarTo</h3>
+					
+					<pre><code class="Java" data-trim contenteditable>
+public class LegoSetTo {
+
+	private long id;
+
+	@NotNull
+	@Size(min = 5, max = 200)
+	private String name;
+
+	@NotNull
+	private Status status;
+
+	@NotNull
+	private Condition condition;
+}
+					</code></pre>	
+				</section>
+				
+								<section>
+					<h3>Obsługa wyjątku</h3>
+					
+					<pre><code class="Java" data-trim contenteditable>
+@RestControllerAdvice
+public class CarControllerAdvice {
+
+	@ExceptionHandler({ MethodArgumentNotValidException.class })
+	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+	public List&lt;ErrorMessageTo&gt; validationException(MethodArgumentNotValidException ex) {
+		ErrorMessageTo message = new ErrorMessageTo();
+		message.setMessage(ex.getLocalizedMessage());
+		return Lists.newArrayList(message);
+	}
+}
+					</code></pre>	
+				</section>
+
+				</section>
+				
 				
 				<!-- ZADANIA 1.X -->
 				<section>
@@ -537,7 +760,7 @@ public boolean deleteCar(@PathVariable("id") Long id) { ... }
 					<section>
 						<h3>1.0 *</h3>
 						<!-- TODO -->
-						<!-- * hello world -->
+						<!-- * hello world springbootowy -->
 					</section>
 					
 					<section>
@@ -549,18 +772,20 @@ public boolean deleteCar(@PathVariable("id") Long id) { ... }
 					
 					<section>
 						<h3>POSTMAN</h3>
+						
 						<!-- TODO -->
+						
+						
 					</section>
 					
 					<section>
 						<h3>1.2 ***</h3>
 						<!-- TODO -->
-						<!-- ** resty pod CRUD --> 
+						<!-- ** resty pod CRUD z postmanem --> 
 						<!-- repository bez niczego w srodku i na wykladzie dopisanie extends i ze smiga --> 
 					</section>
 
 				</section>
-				
 				
 				
 				<!-- ------------- -->
@@ -1417,8 +1642,72 @@ public class PaperBookExemplarEntity extends BookExemplarEntity  {
 					<section id="Mapstruct" data-transition="slide" data-background="orange" data-background-transition="zoom">
 						<h1>Mapstruct</h1>
 					</section>
-				<!-- TODO -->
-
+					
+					<section>
+						<h3>Po co mapowanie?</h3>
+						<ul>
+							<li>Encja-TransportObject
+							<ul>
+								<li>Izolacja warstwy danych od całej reszty
+							</ul>
+							<br>
+							<li>TransportObject-TransportObject
+							<ul>
+								<li>Tłumaczenie danych na różne interfejsy
+							</ul>
+						</ul>
+					</section>
+					
+					<section>
+						<h3>Jak można mapować</h3>
+						<ul>
+							<li>ręcznie (unikać)
+							<li>automatyczne
+							<ul>
+								<li>z wzkorzystaniem refleksji (Dozer, ...)
+								<li>z wzkorzystaniem generowania bajtkodu (Orika, ...)
+								<li>z wzkorzystaniem generowania kodu (Mapstruct, ...)
+							</ul>
+						</ul>
+					</section>
+					
+					<section>
+						<h3>Mapstruct - proste atrybuty różniące się nazwą</h3>
+<pre><code class="Java" data-trim contenteditable>
+    @Mappings({
+        @Mapping(source = "orders", target = "orderItems"),
+        @Mapping(source = "customerName", target = "name")
+    })
+    Customer toCustomer(CustomerDto customerDto);
+</code></pre>
+<a href="https://github.com/mapstruct/mapstruct-examples/blob/master/mapstruct-field-mapping/src/main/java/org/mapstruct/example/mapper/CustomerMapper.java"> LINK </a>
+					</section>
+					
+										<section>
+						<h3>Mapstruct - złożone obiekty</h3>
+<pre><code class="Java" data-trim contenteditable>
+    @Mappings({
+        @Mapping(target = "fish.kind", source = "fish.type"),
+        @Mapping(target = "fish.name", ignore = true),
+        @Mapping(target = "ornament", source = "interior.ornament"),
+        @Mapping(target = "material.materialType", source = "material"),
+        @Mapping(target = "quality.report.organisation.name", source = "quality.report.organisationName")
+    })
+    FishTankDto map(FishTank source);
+</code></pre>
+<a href="https://github.com/mapstruct/mapstruct-examples/blob/master/mapstruct-nested-bean-mappings/src/main/java/org/mapstruct/example/mapper/FishTankMapper.java"> LINK </a>
+					</section>
+					
+					<section>
+						<h3>Mapstruct - trudniejsze mapowania</h3>
+							<ul>
+								<li>mapowanie z kolekcjami
+								<li>mapowanie z zapętlonymi obiektami
+								<li>mapowanie z zaokrągleniami wartości
+								<li>mapowanie obiektów nie przestrzegających konwencji get-set
+							</ul>
+<a href="https://github.com/mapstruct/mapstruct-examples"> LINK </a>
+					</section>
 				</section>
 
 				
