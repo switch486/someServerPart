@@ -674,7 +674,7 @@ public boolean deleteCar(@PathVariable("id") Long id) { ... }
 				<!-- ---- -->
 				<section>
 					<!-- Start -->
-					<section id="REST" data-transition="slide" data-background="orange" data-background-transition="zoom">
+					<section data-transition="slide" data-background="orange" data-background-transition="zoom">
 						<h1>Controler Advice</h1>
 					</section>
 					
@@ -700,7 +700,8 @@ public CarTo updateCar(@RequestBody CarTo car) {
 @RequestMapping(path = "/car", method = RequestMethod.PUT)
 public CarTo updateCar(@RequestBody @Valid CarTo car) { 
 
-	// Metoda nie zostanie wywołana jesli walidacje okreslone deklaratywnie w CarTo nie przechodzą
+	// Metoda nie zostanie wywołana jesli walidacje okreslone 
+	// deklaratywnie w CarTo nie przechodzą
 
 }
 					</code></pre>	
@@ -710,7 +711,7 @@ public CarTo updateCar(@RequestBody @Valid CarTo car) {
 					<h3>CarTo</h3>
 					
 					<pre><code class="Java" data-trim contenteditable>
-public class LegoSetTo {
+public class CarTo {
 
 	private long id;
 
@@ -753,27 +754,41 @@ public class CarControllerAdvice {
 					<!-- Start -->
 					<section id="zadania1" data-transition="slide" data-background="orange" data-background-transition="zoom">
 						<h1>Zadania 1.X</h1>
-						<h2> branch: </h2>
 					</section>
 					
 					<section>
-						<h3>1.0 *</h3>
-						<!-- TODO -->
-						<!-- * hello world springbootowy -->
+						<h2>1.0 *</h2>
+						<h3>Hello World</h3>
+						<h4> branch: git checkout 1.0.step </h4>
+						<ul>
+							<li>Napisać prostą metodę zwracającą Hello World
+							<li>Oanotować tak aby Spring stworzył z niej końcówkę restową
+							<li>Sprawdzić budując i uruchamiając całość serwera.
+							<li>Sprawdzić w przeglądarce na localhost:PORT/survival/METODA
+							<li>? a skąd wiemy jaki port i jaka metoda ?
+						</ul>
 					</section>
 					
 					<section>
-						<h3>1.1 **</h3>
-						<!-- TODO -->
-						<!-- ** resty pod CRUD --> 
-						<!-- repository bez niczego w srodku i na wykladzie dopisanie extends i ze smiga --> 
+						<h2>1.1 **</h2>
+						<h3>CRUD na RESTach</h3>
+						<h4> branch: git checkout 1.1.step </h4>
+						<ul>
+							<li>stworzyć 4 końcówki RESTowe dla scenariusza CRUD
+							<li>końcówki RESTowe powinny odpowiadać tym opisanym na wykładzie w części RESTful API
+							<li>podłączyć mapper i serwis w każdej z metod
+							<li>sygnatury metod jeśli zawierają jakieś obiekty to jest to LegoSetTo
+							<li>Sprawdzić budując i uruchamiając całość serwera.
+						</ul>
 					</section>
 					
 					<section>
-						<h3>1.2 ***</h3>
-						<!-- TODO -->
-						<!-- ** resty pod CRUD z postmanem --> 
-						<!-- repository bez niczego w srodku i na wykladzie dopisanie extends i ze smiga --> 
+						<h2>1.2 ***</h2>
+						<h3>Testowanie końcówek RESTowych</h3>
+						<ul>
+							<li>testowanie restowego API ciężko jest wykonać bez odpowiednich narzędzi
+							<li>użyć Postmana aby przetestować API jakie zostało stworzone w poprzednim ćwiczeniu
+						</ul>
 					</section>
 					
 					<section>
@@ -807,6 +822,17 @@ public class CarControllerAdvice {
 					<h3>DELETE</h3>                    
 					  <img src="resources/img/P_delete.PNG" style="background:none; border:none; box-shadow:none;" >
 					</section>	
+					
+					<section>
+						<h2>1.3 **</h2>
+						<h3>Controler Advice dla własnego wyjątku</h3>
+						<ul>
+							<li>w REST Controlerze rzucić własny wyjątek i zaimplementować jego obsługę w ControlerAdvice.
+						</ul>
+					</section>
+					
+					<!-- TODO -->
+					
 
 				</section>
 				
@@ -1898,6 +1924,14 @@ queryFactory.delete(customer).where(customer.level.lt(3)).execute();
 
 </code></pre>
 				</section>
+				
+				
+						<!-- TODO -->
+						<!-- Predykat -->
+						<!-- TODO -->
+						<!-- Boolean Builder -->
+				
+				
 				</section>
 				
 				
@@ -1906,19 +1940,28 @@ queryFactory.delete(customer).where(customer.level.lt(3)).execute();
 					<!-- Start -->
 					<section id="zadania2" data-transition="slide" data-background="orange" data-background-transition="zoom">
 						<h1>Zadania 2.X</h1>
-						<h2> branch: </h2>
 					</section>
 					
 					<section>
-						<h3>2.0 *</h3>
-						<!-- TODO -->
-						<!-- * JPA Query methods - konwencje -->
+						<h2>2.0 *</h2>
+						<h3>Query By Convention</h3>
+						<h4> branch: git checkout 2.0.step </h4>
+						<ul>
+							<li>Zaimplementować metodę wszukującą zestawy lego na podstawie 2 atrybutów
+							<li>Status
+							<li>Condition
+						</ul>
 					</section>
 					
 					<section>
-						<h3>2.1 *</h3>
-						<!-- TODO -->
-						<!-- @Query adnotacja --> 
+						<h2>2.1 *</h2>
+						<h3>Query By Convention</h3>
+						<h4> branch: git checkout 2.1.step </h4>
+						<ul>
+							<li>Zaimplementować metodę wszukującą zestawy lego na podstawie 2 atrybutów
+							<li>Status
+							<li>Condition
+						</ul>
 					</section>
 					
 					<section>
@@ -1926,6 +1969,9 @@ queryFactory.delete(customer).where(customer.level.lt(3)).execute();
 						<!-- TODO -->
 						<!-- Query DSL --> 
 					</section>
+					
+					<!-- TODO -->
+					<!-- dla nadgorliwych ... -->
 
 				</section>
 				
@@ -2145,6 +2191,10 @@ public void shouldAddNewBook() throws Exception {
 						<!-- TODO -->
 						<!-- ** mockowanie - argument captors --> 
 					</section>
+					
+						<!-- TODO -->
+						<!-- dla nadgorliwych otestowanie query DSLa -->
+					
 
 				</section>
 				
