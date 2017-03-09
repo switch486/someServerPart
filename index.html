@@ -1925,11 +1925,52 @@ queryFactory.delete(customer).where(customer.level.lt(3)).execute();
 </code></pre>
 				</section>
 				
+								<section>
+					<h3>Query DSL - Klauzula Where</h3>
+
+					<ul>
+						<li>przyjmuje predykat bądź listę predykatów
+						<li>Predykat to Typ i interfejs, jego implementacje są poniżej
+					</ul>
+					
+					<img src="resources/img/predicate.PNG" style="background:none; border:none; box-shadow:none;">
+				</section>
 				
-						<!-- TODO -->
-						<!-- Predykat -->
-						<!-- TODO -->
-						<!-- Boolean Builder -->
+				<section>
+					<h3>Query DSL - BooleanExpression</h3>
+
+					<pre><code class="Java" data-trim contenteditable>
+QLegoSet legoSet = QLegoSet.legoSet;
+
+BooleanExpression ex = legoSet.legoName.eq("");
+
+ex = ex.and(legoSet.legoName.contains("asdf"));
+
+ex = ex.and(legoSet.legoVersion.isNull());
+					</code></pre>
+					
+				</section>
+				
+				<section>
+					<h3>Query DSL - BooleanBuilder</h3>
+
+					<pre><code class="Java" data-trim contenteditable>
+QLegoSet legoSet = QLegoSet.legoSet;
+
+BooleanBuilder builder = new BooleanBuilder();
+
+if (status != null) {
+	builder.and(legoSet.legoStatus.eq(status));
+}
+
+if (StringUtils.isNotBlank(externallId)) {
+	builder.and(legoSet.legoName.eq(externallId));
+}
+
+Predicate p = builder.getValue();
+					</code></pre>
+					
+				</section>
 				
 				
 				</section>
@@ -1955,19 +1996,22 @@ queryFactory.delete(customer).where(customer.level.lt(3)).execute();
 					
 					<section>
 						<h2>2.1 *</h2>
-						<h3>Query By Convention</h3>
+						<h3>Adnotacja @Query</h3>
 						<h4> branch: git checkout 2.1.step </h4>
 						<ul>
-							<li>Zaimplementować metodę wszukującą zestawy lego na podstawie 2 atrybutów
-							<li>Status
-							<li>Condition
+							<li>Zaimplementować metodę wszukującą zestawy lego na podstawie prefixu nazwy zestawu
 						</ul>
 					</section>
 					
 					<section>
-						<h3>2.2 **</h3>
-						<!-- TODO -->
-						<!-- Query DSL --> 
+						<h2>2.2 **</h2>
+						<h3>Adnotacja @Query</h3>
+						<h4> branch: git checkout 2.2.step </h4>
+						<ul>
+							<li>Zaimplementować metodę wszukującą zestawy lego zestawie kryteriów
+							<li>* w implementacji użyć Predykatów
+							<li>** w implementacji użyć BooleanBuildera
+						</ul>
 					</section>
 					
 					<!-- TODO -->
