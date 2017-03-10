@@ -2036,8 +2036,44 @@ Predicate p = builder.getValue();
 						</ul>
 					</section>
 					
-					<!-- TODO -->
-					<!-- dla nadgorliwych ... -->
+					
+					
+					<section>
+						<h2>Konsola Bazy H2</h2>
+						Ciało application.properties
+					<pre><code class="Java" data-trim contenteditable>
+# H2 Web Console (H2ConsoleProperties)
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+spring.h2.console.settings.trace=false
+spring.h2.console.settings.web-allow-others=true 
+					</code></pre>
+					
+<ul>
+<li>Driver Class: org.h2.Driver 
+<li>JDBC URL: jdbc:h2:mem:testdb 
+<li>User Name: sa 
+<li>Password: (none) 
+<li>LINK: http://localhost:8080/h2-console 
+</ul>
+						
+					</section>
+					
+					<section>
+						<h2>2.4 ***</h2>
+						<h3>LegoPart</h3>
+						<ul>
+							<li>stworzyć nową encję LegoPart
+							<li>LegoSet może składać się z wielu LegoPart
+							<li>do zrobienia:
+							<ul>
+								<li>encja + adnotacje do niej (relacja 1 - *)
+								<li>mapper
+								<li>nowy REST Controller
+								<li>wyszukiwanie części dla zestawu (posortowanych po czymś)
+							</ul>
+						</ul>
+					</section>
 
 				</section>
 				
